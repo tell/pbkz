@@ -1,5 +1,5 @@
 language: cpp
-sudo: false
+sudo: required
 os: linux
 dist: trusty
 compiler: gcc
