@@ -1,0 +1,26 @@
+language: cpp
+sudo: false
+
+os: osx
+osx_image: xcode7.3
+compiler: gcc
+env: CXX_=g++-5
+
+before_install:
+- export CXX=$CXX_
+
+install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc5; fi
+
+before_script:
+- $CXX --version
+- make
+
+script:
+- make check
+
+notifications:
+  on_success: change
+  on_failure: always
+
