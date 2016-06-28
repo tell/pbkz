@@ -6,11 +6,14 @@ ifeq (1,$(OPTIMIZE))
 CXXFLAGS += -march=native -flto
 endif
 CPPFLAGS += -I ./include -I $(NTL_PREFIX)/include
-LDLIBS += $(NTL_PREFIX)/lib/libntl.a -lgmp -lgsl -lgslcblas
+
+# LDLIBS += $(NTL_PREFIX)/lib/libntl.a -lgmp -lgsl -lgslcblas
+LDLIBS += -lntl -lgmp -lgsl -lgslcblas
+LDFLAGS += -L $(NTL_PREFIX)/lib
 
 ifneq (Darwin,$(shell uname -s))
-CXXFLAGS += -fopenmp
-LDFLAGS += -fopenmp
+# CXXFLAGS += -fopenmp
+# LDFLAGS += -fopenmp
 endif
 
 .PNOHY: all clean
