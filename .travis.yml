@@ -10,7 +10,7 @@ env: CXX_=g++-5
 
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc5 gmp gsl boost; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libtool gcc gmp gsl boost; fi
 
 before_script:
 - export CXX=$CXX_
