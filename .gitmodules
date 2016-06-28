@@ -1,0 +1,6 @@
+[submodule "submods/latticechlgs"]
+	path = submods/latticechlgs
+	url = https://github.com/tell/latticechlgs.git
+[submodule "submods/ntl-unix"]
+	path = submods/ntl-unix
+	url = https://github.com/tell/ntl-unix.git
