@@ -3,14 +3,14 @@ sudo: false
 
 os: linux
 compiler: gcc
-env: CXX_=g++-5
+env: CXX_=g++-4.8
 addons:
   apt:
     sources:
     # - deadsnakes
     - ubuntu-toolchain-r-test
     packages:
-    - g++-5
+    - gcc-4.8
     - libgmp-dev
     - libgsl0-dev
 cache:
