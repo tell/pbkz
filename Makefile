@@ -2,7 +2,7 @@ include common.mk
 
 .PHONY: all clean submods links subdirs
 
-all: submods links subdirs
+all: links subdirs
 
 clean:
 	-$(MAKE) -C pbkzlib clean
