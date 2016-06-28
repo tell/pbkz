@@ -1,21 +1,15 @@
-ifneq ($(MAKECMDGOALS),clean)
-ifeq (1,$(shell test -d "$(NTL_SRC)" || echo 1))
-$(error Invalid NTL source directory: NTL_SRC="$(NTL_SRC)")
-endif
-ifeq (1,$(shell test -d "$(NTL_PREFIX)" || echo 1))
-$(error Invalid NTL installation directory: NTL_PREFIX="$(NTL_PREFIX)")
-endif
-ifeq (1,$(shell test -d "$(GEN_SRC)" || echo 1))
-$(error Invalid instance generator source directory: GEN_SRC="$(GEN_SRC)")
-endif
-endif
+include common.mk
 
-.PHONY: all clean links subdirs
+.PHONY: all clean submods links subdirs
 
-all: links subdirs
+all: submods links subdirs
 
 clean:
 	-$(MAKE) -C pbkzlib clean
+
+submods:
+	mkdir -p $(NTL_PREFIX)
+	$(MAKE) -C submods
 
 links:
 	mkdir -p pbkzlib/include/external

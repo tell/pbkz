@@ -1,3 +1,5 @@
+include ../common.mk
+
 CC = $(CXX)
 CXXFLAGS += -std=c++11 -Wall -Wextra -Ofast
 ifeq (1,$(OPTIMIZE))
