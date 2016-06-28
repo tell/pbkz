@@ -13,7 +13,7 @@ addons:
     - g++-4.8
     - libgmp-dev
     - libgsl0-dev
-    - libboost1.58-dev
+    - libboost1.55-dev
 cache:
   apt: true
 
