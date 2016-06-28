@@ -23,6 +23,7 @@ cache:
 before_script:
 - export CXX=$CXX_
 - $CXX --version
+- make submods
 - make
 
 script:
