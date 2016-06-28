@@ -1,7 +1,8 @@
 include ../common.mk
 
 ifeq (Darwin,$(shell uname -s))
-NTL_SCRIPT = sed '162,164d' ntl-unix/ntl/src/DoConfig > DoConfig && mv -f DoConfig ntl-unix/ntl/src/DoConfig
+# TODO: should be fixed.
+NTL_SCRIPT = false # sed '162,164d' ntl-unix/ntl/src/DoConfig > DoConfig && mv -f DoConfig ntl-unix/ntl/src/DoConfig
 else
 NTL_SCRIPT = true
 endif
