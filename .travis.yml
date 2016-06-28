@@ -1,16 +1,23 @@
 language: cpp
 sudo: false
 
-os: osx
-osx_image: xcode7.3
+os: linux
 compiler: gcc
 env: CXX_=g++
+addons:
+  apt:
+    sources:
+    # - deadsnakes
+    - ubuntu-toolchain-r-test
+    packages:
+    - libgmp-dev
+    - libgsl0-dev
+cache:
+  apt: true
 
 # before_install:
 
-install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libtool gcc gmp gsl boost; fi
+# install:
 
 before_script:
 - export CXX=$CXX_
@@ -24,3 +31,4 @@ notifications:
   on_success: change
   on_failure: always
 
+# vim : set expandtab :
