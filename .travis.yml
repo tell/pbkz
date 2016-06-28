@@ -10,6 +10,7 @@ addons:
     # - deadsnakes
     - ubuntu-toolchain-r-test
     packages:
+    - build-essential
     - libgmp-dev
     - libgsl0-dev
 cache:
@@ -31,4 +32,4 @@ notifications:
   on_success: change
   on_failure: always
 
-# vim : set expandtab :
+# vim: set expandtab :
