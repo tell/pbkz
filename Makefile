@@ -10,16 +10,19 @@ $(error Invalid instance generator source directory: GEN_SRC="$(GEN_SRC)")
 endif
 endif
 
-.PHONY: all links subdirs
+.PHONY: all clean links subdirs
 
 all: links subdirs
 
+clean:
+	-$(MAKE) -C pbkzlib clean
+
 links:
+	mkdir -p pbkzlib/include/external
 	cd pbkzlib/include/external && \
-		ln -fs $(NTL_SRC)/LLL_RR.c && \
-		ln -fs $(NTL_SRC)/LLL_QP.c && \
-		ln -fs $(GEN_SRC)/tools.h && \
-		ln -fs $(GEN_SRC)/ideal.h
+		for x in $(NTL_SRC)/LLL_RR.c $(NTL_SRC)/LLL_QP.c $(GEN_SRC)/tools.h $(GEN_SRC)/ideal.h; do \
+			[ -f `basename $$x` ] || ln -fs $$x; \
+		done
 
 subdirs:
 	$(MAKE) -C pbkzlib
