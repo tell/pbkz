@@ -8,7 +8,7 @@ NTL_SCRIPT = true
 endif
 
 NTL_CD = cd ntl-unix/ntl/src
-NTL_CONFIG = ./configure NATIVE=off CXX=$(CXX) CXXFLAGS='-std=c++11 -g -O3' PREFIX=$(NTL_PREFIX) SHARED=on
+NTL_CONFIG = ./configure NATIVE=off CXX=$(CXX) CXXFLAGS='-std=c++11 -g -O3' PREFIX=$(NTL_PREFIX)
 
 .PHONY: all clean
 
