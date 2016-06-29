@@ -1,21 +1,24 @@
 language: cpp
 sudo: required
-os: linux
-dist: trusty
-compiler: gcc
-env: CXX_=g++-4.8
-addons:
-  apt:
-    sources:
-    # - deadsnakes
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-    - libgmp-dev
-    - libgsl0-dev
-    - libboost1.55-dev
-cache:
-  apt: true
+
+matrix:
+  include:
+  - os: linux
+    dist: trusty
+    compiler: gcc
+    env: CXX_=g++-4.8
+    addons:
+      apt:
+        sources:
+        # - deadsnakes
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.8
+        - libgmp-dev
+        - libgsl0-dev
+        - libboost1.55-dev
+    cache:
+      apt: true
 
 # before_install:
 
