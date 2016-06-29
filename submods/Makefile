@@ -15,10 +15,10 @@ NTL_CONFIG = ./configure NATIVE=off CXX=$(CXX) CXXFLAGS='-std=c++11 -g -O3' PREF
 all: ntl-unix.done
 
 clean:
-	cd ntl-unix/ntl/src && make clean && rm -f all
+	-$(NTL_CD) && make clean && rm -f all
 
 ntl-unix.done:
 	$(NTL_SCRIPT)
-	$(NTL_CD) && $(NTL_CONFIG) && make && make install
+	$(NTL_CD) && $(NTL_CONFIG) && make >/dev/null 2>&1 && make install
 	touch $@
 
