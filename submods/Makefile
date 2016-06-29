@@ -19,6 +19,6 @@ clean:
 	-$(NTL_CD) && make clean && rm -f all
 
 ntl-unix.done:
-	$(NTL_CD) && $(NTL_CONFIG) && make >/dev/null 2>&1 && make install
+	$(NTL_CD) && $(NTL_CONFIG) && make && make install
 	touch $@
 
