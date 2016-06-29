@@ -9,7 +9,7 @@ else
 NTL_SCRIPT = true
 endif
 
-NTL_CONFIG = ./configure NATIVE=off CXX=$(CXX) CXXFLAGS='-std=c++11 -g -O3' PREFIX=$(NTL_PREFIX)
+NTL_CONFIG = ./configure CXX=$(CXX) CXXFLAGS='-std=c++11 -g -O3' PREFIX=$(NTL_PREFIX)
 
 .PHONY: all clean
 
