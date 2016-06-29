@@ -19,10 +19,16 @@ matrix:
         - libboost1.55-dev
     cache:
       apt: true
+  - os: osx
+    osx_image: xcode7.3
+    compiler: gcc
+    env: CXX_=g++
 
 # before_install:
 
-# install:
+install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl gmp boost; fi
 
 before_script:
 - export CXX=$CXX_
