@@ -105,8 +105,9 @@ inline void omp_set_num_threads(int) {}
 //Tools for lattice vector enumeration
 #include "pruningfunc.cpp"
 #include "vectorenumeration.cpp"
-        
-//progressive BKZ routines
+#include "vectorenumeration_close.cpp"
+
+        //progressive BKZ routines
 #include "pbkzsharemem.cpp"
 #include "pbkzproperty.cpp"
 #include "pbkzsupport.cpp"
@@ -124,6 +125,15 @@ inline void omp_set_num_threads(int) {}
 #endif
         
         
+#include <string>
+#include <vector>
+#include <map>
+
+#include <boost/algorithm/string.hpp>
+
+typedef std::map<std::string,std::string> stringmap;
+typedef std::vector<std::string> bkzstrategy;
+typedef std::vector<double> pruningfunction;
 
 
 
