@@ -10,8 +10,8 @@
     #include <develroutines/precodes.cpp>
 #endif
 
-#include <lattice/pbkz.hpp>
-#include <lattice/genlattice.cpp>
+#include "lattice/pbkz.hpp"
+#include "lattice/genlattice.cpp"
 
 
 #ifdef __develop

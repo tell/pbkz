@@ -62,7 +62,7 @@ void GenerateChallenge(mat_ZZ& L, stringmap& arg) {
 }
 #endif
 
-#include <lattice/gen_uni_mat.cpp>
+#include "lattice/gen_uni_mat.cpp"
 
 #include "lattice/latticetools.cpp"
 

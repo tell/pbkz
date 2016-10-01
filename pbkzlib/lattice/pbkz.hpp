@@ -76,7 +76,7 @@ inline void omp_set_num_threads(int) {}
 #include "vectorset.cpp"        
         
 //LLL subroutines are used
-#include "../external/LLL_RR.c"
+#include "../include/external/LLL_RR.c"
 
 //The following defines are adopted to NTL 9.7.0
 #define RowTransform RowTransformQP
@@ -94,7 +94,7 @@ inline void omp_set_num_threads(int) {}
 #define BKZThresh BKZThreshQP
 #define BKZStatus BKZStatusQP
 #define ComputeBKZConstant ComputeBKZConstantQP
-#include "../external/LLL_QP.c"
+#include "../include/external/LLL_QP.c"
 /*
 #undef RowTransform
 #undef RowTransform2
@@ -116,12 +116,12 @@ inline void omp_set_num_threads(int) {}
 
 
 #ifdef _include_svpchallenge_generator
-    #include "../external/tools.h"
+    #include "../include/external/tools.h"
 #endif
 
 #ifdef _include_idealchallenge_generator
     #include <NTL/ZZX.h>
-    #include "../external/ideal.h"
+    #include "../include/external/ideal.h"
 #endif
         
         
