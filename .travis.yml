@@ -28,7 +28,7 @@ matrix:
 
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink gmp; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink gmp; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl gmp; fi
 
 before_script:
