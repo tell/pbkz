@@ -5,7 +5,7 @@ CXXFLAGS += -std=c++11 -Wall -Wextra -Ofast
 ifeq (1,$(OPTIMIZE))
 CXXFLAGS += -march=native -flto
 endif
-CPPFLAGS += -I ./include -I $(NTL_PREFIX)/include
+CPPFLAGS += -I . -I $(NTL_PREFIX)/include
 
 # LDLIBS += $(NTL_PREFIX)/lib/libntl.a -lgmp -lgsl -lgslcblas
 LDLIBS += -lntl -lgmp -lgsl -lgslcblas
