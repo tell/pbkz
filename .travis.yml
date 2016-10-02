@@ -6,14 +6,14 @@ matrix:
   - os: linux
     dist: trusty
     compiler: gcc
-    env: CXX_=g++-4.8
+    env: CXX_=g++-5
     addons:
       apt:
         sources:
         # - deadsnakes
         - ubuntu-toolchain-r-test
         packages:
-        - g++-4.8
+        - g++-5
         - libgmp-dev
         - libgsl0-dev
         - libboost1.55-dev
@@ -28,7 +28,6 @@ matrix:
 
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
-# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew unlink gmp; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl gmp; fi
 
 before_script:
