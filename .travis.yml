@@ -1,4 +1,4 @@
-# vim: set expandtab :
+# vim: set expandtab shiftwidth=2 softtabstop=2 :
 
 language: cpp
 sudo: required
