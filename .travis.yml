@@ -1,3 +1,5 @@
+# vim: set expandtab :
+
 language: cpp
 sudo: required
 
@@ -6,17 +8,17 @@ matrix:
   - os: linux
     dist: trusty
     compiler: gcc
-    env: CXX_=g++-4.8
+    env: CXX_=g++
     addons:
       apt:
         sources:
         # - deadsnakes
         - ubuntu-toolchain-r-test
         packages:
-        - g++-4.8
+        - build-essential
         - libgmp-dev
         - libgsl0-dev
-        - libboost1.55-dev
+        - libboost-all-dev
     cache:
       apt: true
   - os: osx
@@ -31,15 +33,15 @@ install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl gmp; fi
 
 before_script:
-- export CXX=$CXX_
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CXX=$CXX_; fi
 - $CXX --version
-- make submods
+- make submods > /dev/null 2>&1 && touch submod.done &
+- i=0; while [ ! -f submod.done ]; do sleep 240; echo $i; i=`expr $i + 1`; done
 
 script:
+- if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \; ; fi
 - make
 
 notifications:
   on_success: change
   on_failure: always
-
-# vim: set expandtab :
