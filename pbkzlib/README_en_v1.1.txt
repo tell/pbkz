@@ -71,7 +71,7 @@ boost 1.58.0 (http://www.boost.org/)
  A
 ###
 
-Download and extract the file gpbkzlib-xxx.ziph.
+Download and extract the file â€œpbkzlib-xxx.zipâ€.
 
 ###
  B
@@ -82,15 +82,15 @@ Please copy them to /include/external if there is any absence.
 
 B1. Bases generator from SVP Challenge:
 http://www.latticechallenge.org/svp-challenge/download/generator.zip
-In the generator folder, gtools.hh and ggenerate_random.cpph are necessary.
+In the generator folder, â€œtools.hâ€ and â€œgenerate_random.cppâ€ are necessary.
 
 B2. Bases generator from Ideal Lattice Challenge:
 http://www.latticechallenge.org/ideallattice-challenge/download/generator.zip
-In the generator folder, gideal.hh and ggenerate_ideal.cpph are necessary.
+In the generator folder, â€œideal.hâ€ and â€œgenerate_ideal.cppâ€ are necessary.
 
 B3. Subroutines from NTL Library:
 http://www.shoup.net/ntl/
-gsrc/LLL_QP.ch and gsrc/LLL_RR.ch are necessary.
+â€œsrc/LLL_QP.câ€ and â€œsrc/LLL_RR.câ€ are necessary.
 
 NOTE: Here in B3 we recommend using NTL 9.6.0.
 
@@ -110,7 +110,7 @@ pruning functions and simulations.
 run %make in the extracted directory.
 Note that according to the compilers,
 some warning messages may be imported during the compiling process.
-Please ignore them if the file ga.outh is output successfully. 
+Please ignore them if the file â€œa.outâ€ is output successfully. 
 
 
 
@@ -128,10 +128,10 @@ lf = logfile
 si = LLLStatusInterval (seconds between status reports)
 nt = number of threads to be used in BKZ and ENUM
 
-There are also some other options as g-genbasish, g-lllh, h-bkzh, g-enumh, g-genstrategyh, g-pfunch,
-h-randomizebasish, g-withenumh, g-type (svp/ideal/unimodular)h and so on.
+There are also some other options as â€œ-genbasisâ€, â€œ-lllâ€, â€-bkzâ€, â€œ-enumâ€, â€œ-genstrategyâ€, â€œ-pfuncâ€,
+â€-randomizebasisâ€, â€œ-withenumâ€, â€œ-type (svp/ideal/unimodular)â€ and so on.
 We will give some usages of these options in the examples below.
-Also please reference gmain.cpph for more details.
+Also please reference â€œmain.cppâ€ for more details.
 
 Note that the bases generating program works in a single thread.
 
@@ -150,7 +150,7 @@ Ex.1 Verify the contents in section 6.2 by Ideal Lattice Challenge.
 %./a.out -if lll_i421.txt -bkz -sf str421approx -of bkz_i421.txt
 
 Note that the generating step 1.2 takes some time.
-The output file gstr421approxh includes the BKZ blocksize strategy. 
+The output file â€œstr421approxâ€ includes the BKZ blocksize strategy. 
 
 
 ###
@@ -173,9 +173,9 @@ and the bash script file: str100_1.05gh.sh
 %chmod +x str100_1.05gh.sh
 %./str100_1.05gh.sh
 
-You can check the BKZ reduced basis from gstr100_1.05gh.bkz.log.**h,
-get the details of ENUM search process from gstr100_1.05gh.enum.log.**h
-and ENUM search results from gsvp100.logh.
+You can check the BKZ reduced basis from â€œstr100_1.05gh.bkz.log.**â€,
+get the details of ENUM search process from â€œstr100_1.05gh.enum.log.**â€
+and ENUM search results from â€œsvp100.logâ€.
 
 
 ####################
@@ -245,7 +245,7 @@ the same address as pbkz-info@ml.nict.go.jp.
 ########################
 
 Subroutine to generate Unimodular matrices (lattice/gen_uni_mat.cpp) 
-is recoded from the open source code Sage-7.1, where the function is grandom_unimodular_matrix()h.
+is recoded from the open source code Sage-7.1, where the function is â€œrandom_unimodular_matrix()â€.
 
 This library is not thread-safe.
 
