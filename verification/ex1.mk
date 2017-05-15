@@ -12,6 +12,5 @@ ex_1-3: FORCE ex_1-2
 	echo "#1.3# Run progressive BKZ to solve approximate Ideal Lattice Challenge."
 	$(PBKZ) -if lll_i421.txt -bkz -sf str421approx -of bkz_i421.txt
 
-run: FORCE ex_1-3
-	cat $<
+run: ex_1-3 FORCE
 	cat str421approx
