@@ -14,9 +14,10 @@ ex_2-3: ex_2-2 FORCE
 	chmod u+x str100_1.05gh.sh
 	./str100_1.05gh.sh
 
-do: ex_2-3 FORCE
+do: FORCE
+	echo "Ex.2 Verify the contents in section 8 by SVP Challenge."
+	$(MAKE) ex_2-3
 	cat svp100.log
 
 run: FORCE
-	echo "Ex.2 Verify the contents in section 8 by SVP Challenge."
 	time $(MAKE) do 2>&1 | tee $@.log
