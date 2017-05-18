@@ -12,9 +12,10 @@ ex_1-3: ex_1-2 FORCE
 	echo "#1.3# Run progressive BKZ to solve approximate Ideal Lattice Challenge."
 	$(PBKZ) -if lll_i421.txt -bkz -sf str421approx -of bkz_i421.txt
 
-do: ex_1-3 FORCE
+do: FORCE
+	echo "Ex.1 Verify the contents in section 6.2 by Ideal Lattice Challenge."
+	$(MAKE) ex_1-3
 	cat str421approx
 
 run: FORCE
-	echo "Ex.1 Verify the contents in section 6.2 by Ideal Lattice Challenge."
 	time $(MAKE) do 2>&1 | tee $@.log
