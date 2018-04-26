@@ -1,7 +1,7 @@
 # vim: set expandtab shiftwidth=2 softtabstop=2 :
 
 language: cpp
-sudo: required
+# sudo: required
 
 matrix:
   include:
