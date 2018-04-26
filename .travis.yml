@@ -17,6 +17,7 @@ matrix:
         - build-essential
         - g++-5
         - libgmp-dev
+        - libmpfr-dev
         - libgsl0-dev
         - libboost-all-dev
         - cppcheck
