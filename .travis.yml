@@ -47,8 +47,8 @@ before_script:
 - i=0; while [ ! -f submod.done ]; do sleep 300; echo $i; i=`expr $i + 1`; done
 
 script:
-- if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \; ; fi
-- if which cpplint; then find pbkzlib -iname '*.cpp' -exec cpplint {} \; ; fi
+# - if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \; ; fi
+# - if which cpplint; then find pbkzlib -iname '*.cpp' -exec cpplint {} \; ; fi
 - make
 
 notifications:
