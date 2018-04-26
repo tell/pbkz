@@ -6,7 +6,7 @@ language: cpp
 matrix:
   include:
   - os: linux
-#    dist: trusty
+    dist: xenial
     compiler: gcc
     env: CXX_=g++-5
     addons:
