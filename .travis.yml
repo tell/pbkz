@@ -6,7 +6,7 @@ sudo: required
 matrix:
   include:
   - os: linux
-    dist: xenial
+    dist: trusty
     compiler: gcc
     env: CXX_=g++-5
     addons:
