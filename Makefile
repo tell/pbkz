@@ -1,13 +1,16 @@
 include common.mk
 
-.PHONY: all clean submods prepare subdirs
+.PHONY: submods subdirs
 
+.PHONY: all
 all: prepare patch.done subdirs
 check:
 	$(MAKE) -C verification check
 
+.PHONY: clean
 clean:
 	-$(MAKE) -C pbkzlib clean
+	$(RM) *.done
 
 submods:
 	mkdir -p $(NTL_PREFIX)
