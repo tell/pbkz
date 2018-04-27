@@ -7,8 +7,8 @@ service:
 
 env:
   global:
-  - CC=gcc
-  - CXX=g++
+  - MY_CC=gcc
+  - MY_CXX=g++
   - MY_NAME=travis-ci
   - MY_TARGET_MOUNT=/tell/pbkz
 matrix:
@@ -25,6 +25,8 @@ matrix:
     - MY_TARGET_DIST=ubuntu:18.04
 
 before_install:
+- export CC=$CC_
+- export CXX=$CXX_
 - docker pull $MY_TARGET_DIST
 - docker run --name $MY_NAME -v $TRAVIS_BUILD_DIR:$MY_TARGET_MOUNT -td $MY_TARGET_DIST /bin/bash
 
