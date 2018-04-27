@@ -22,13 +22,13 @@ before_install:
 install:
 - docker exec -ti $MY_NAME bash -c "apt update"
 - docker exec -ti $MY_NAME bash -c "apt install -y build-essential"
-- docker exec -ti $MY_NAME bash -c "apt install -y libgmp-dev libmpfr-dev libgsl-dev libboost-all-dev"
+- docker exec -ti $MY_NAME bash -c "apt install -y libgmp-dev libmpfr-dev libgsl-dev libboost-all-dev" > /dev/null
 
 before_script:
 - docker exec -ti $MY_NAME bash -c "echo $CC"
-- docker exec -ti $MY_NAME bash -c "\$CC --version"
-- docker exec -ti $MY_NAME bash -c "echo \$CXX"
-- docker exec -ti $MY_NAME bash -c "\$CXX --version"
+- docker exec -ti $MY_NAME bash -c "$CC --version"
+- docker exec -ti $MY_NAME bash -c "echo $CXX"
+- docker exec -ti $MY_NAME bash -c "$CXX --version"
 - docker exec -ti $MY_NAME bash -c "make submods > /dev/null 2>&1 && touch submod.done"
 - i=0; while [ ! -f submod.done ]; do sleep 300; echo $i; i=`expr $i + 1`; done
 
