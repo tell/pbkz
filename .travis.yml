@@ -5,12 +5,13 @@ sudo: required
 service:
 - docker
 
-matrix:
+env:
   global:
   - CC=gcc
   - CXX=g++
   - MY_NAME=travis-ci
   - MY_TARGET_MOUNT=/tell/pbkz
+matrix:
   include:
   - os: linux
     dist: trusty
