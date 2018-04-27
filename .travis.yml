@@ -40,12 +40,10 @@ before_script:
 - docker exec -ti $MY_NAME bash -c "$CXX --version"
 - docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; pwd ; ls -la"
 - docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; make submods && touch submod.done"
-- docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; i=0 ; while [ ! -f submod.done ] ; do echo $i ; sleep 300 ; i=`expr $i + 1` ; done"
+- ls -la $TRAVIS_BUILD_DIR
 
 script:
-- if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \; ; fi
-- if which cpplint; then find pbkzlib -iname '*.cpp' -exec cpplint {} \; ; fi
-- if [[ ! "$CPPCHECK_" == "1" ]]; then make; fi
+- docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; make"
 
 notifications:
   on_success: change
