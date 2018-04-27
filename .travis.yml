@@ -9,8 +9,8 @@ os: linux
 dist: trusty
 compiler: gcc
 env:
-- MY_NAME=travis-ci
-- MY_GIT_REPO=/tell/pbkz
+  - MY_NAME=travis-ci
+  - MY_GIT_REPO=/tell/pbkz
 
 before_install:
 - docker pull ubuntu:16.04
