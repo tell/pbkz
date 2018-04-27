@@ -17,12 +17,14 @@ matrix:
     dist: trusty
     compiler: gcc
     env:
-    - MY_TARGET_DIST=ubuntu:16.04
+    - MY_TARGET_DIST=ubuntu:18.04
+    - MY_MODE=build
   - os: linux
     dist: trusty
     compiler: gcc
     env:
     - MY_TARGET_DIST=ubuntu:18.04
+    - MY_MODE=cppcheck
 
 before_install:
 - export CC=$MY_CC
@@ -32,8 +34,9 @@ before_install:
 
 install:
 - docker exec -ti $MY_NAME bash -c "apt update" > /dev/null
-- docker exec -ti $MY_NAME bash -c "apt install -y build-essential git" > /dev/null
+- docker exec -ti $MY_NAME bash -c "apt install -y build-essential" > /dev/null
 - docker exec -ti $MY_NAME bash -c "apt install -y libgmp-dev libmpfr-dev libgsl-dev libboost-all-dev" > /dev/null
+- if [ "$MY_MODE" == "cppcheck" ] ; then docker exec -ti $MY_NAME bash -c "apt install -y cppcheck" > /dev/null ; fi
 
 before_script:
 - docker exec -ti $MY_NAME bash -c "$CC --version"
@@ -43,7 +46,8 @@ before_script:
 - ls -la $TRAVIS_BUILD_DIR
 
 script:
-- docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; make"
+- if [ "$MY_MODE" == "build" ] ; then docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; make" ; fi
+- if [ "$MY_MODE" == "cppcheck" ] ; then docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \\; ; fi" > /dev/null ; fi
 
 notifications:
   on_success: change
