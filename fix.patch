@@ -1,5 +1,5 @@
 diff --git a/pbkzlib/Makefile b/pbkzlib/Makefile
-index 4a9db83..6703411 100644
+index 4a9db83..81f25de 100644
 --- a/pbkzlib/Makefile
 +++ b/pbkzlib/Makefile
 @@ -1,9 +1,11 @@
@@ -8,9 +8,10 @@ index 4a9db83..6703411 100644
  CC	= g++
  SRC	= main.cpp
  BOOST_DIR = ./boost_1_66_0
- CFLAGS	= -std=c++11 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive
+-CFLAGS	= -std=c++11 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive
 -LDFLAGS	= -lgmp -lmpfr -lgsl -lntl -fopenmp
 -INCL	= -I. -I${BOOST_DIR}
++CFLAGS	= -std=c++14 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive
 +LDFLAGS	=  -L$(ROOT_DIR)/prefix/lib -lgmp -lmpfr -lgsl -lgslcblas -lntl -fopenmp
 +INCL	= -I. -I${BOOST_DIR} -I$(ROOT_DIR)/prefix/include
  
