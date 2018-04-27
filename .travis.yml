@@ -27,7 +27,7 @@ install:
 before_script:
 - docker exec -ti $MY_NAME bash -c "$CC --version"
 - docker exec -ti $MY_NAME bash -c "$CXX --version"
-- docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT && ll"
+- docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT && pwd && ls -la"
 - docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT && make submods > /dev/null 2>&1 && touch submod.done"
 - i=0; while [ ! -f submod.done ]; do sleep 300; echo $i; i=`expr $i + 1`; done
 
