@@ -47,7 +47,7 @@ before_script:
 
 script:
 - if [ "$MY_MODE" == "build" ] ; then docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; make" ; fi
-- if [ "$MY_MODE" == "cppcheck" ] ; then docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \\; ; fi" > /dev/null ; fi
+- if [ "$MY_MODE" == "cppcheck" ] ; then docker exec -ti $MY_NAME bash -c "cd $MY_TARGET_MOUNT ; if which cppcheck; then find pbkzlib -iname '*.cpp' -exec cppcheck --enable=all --force -I `pwd`/pbkzlib -I `pwd`/prefix/include {} \\; ; fi" ; fi
 
 notifications:
   on_success: change
