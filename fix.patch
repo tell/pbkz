@@ -1,19 +1,48 @@
+diff --git a/fix.patch b/fix.patch
+index a791a37..e69de29 100644
+--- a/fix.patch
++++ b/fix.patch
+@@ -1,25 +0,0 @@
+-diff --git a/pbkzlib/Makefile b/pbkzlib/Makefile
+-index 4a9db83..22c16cc 100644
+---- a/pbkzlib/Makefile
+-+++ b/pbkzlib/Makefile
+-@@ -1,11 +1,11 @@
+--CC	= g++
+--SRC	= main.cpp
+--BOOST_DIR = ./boost_1_66_0
+--CFLAGS	= -std=c++11 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive
+--LDFLAGS	= -lgmp -lmpfr -lgsl -lntl -fopenmp
+--INCL	= -I. -I${BOOST_DIR}
+--
+--all:
+--	${CC} ${CFLAGS} ${SRC} ${INCL} ${LDFLAGS}
+-+include ../common.mk
+- 
+-+CC	= $(CXX)
+-+INCL	= -I. -I$(ROOT_DIR)/prefix/include
+-+CFLAGS	= -std=c++14 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive -Wall -Wextra $(INCL)
+-+CXXFLAGS = $(CFLAGS)
+-+LDFLAGS	=  -L$(ROOT_DIR)/prefix/lib -fopenmp
+-+LOADLIBES = -lgmp -lmpfr -lgsl -lgslcblas -lntl
+- 
+-+main.out: main.cpp
+-+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
 diff --git a/pbkzlib/Makefile b/pbkzlib/Makefile
-index 4a9db83..22c16cc 100644
+index 4a9db83..cfad950 100644
 --- a/pbkzlib/Makefile
 +++ b/pbkzlib/Makefile
-@@ -1,11 +1,11 @@
+@@ -1,11 +1,39 @@
 -CC	= g++
 -SRC	= main.cpp
 -BOOST_DIR = ./boost_1_66_0
 -CFLAGS	= -std=c++11 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive
 -LDFLAGS	= -lgmp -lmpfr -lgsl -lntl -fopenmp
 -INCL	= -I. -I${BOOST_DIR}
--
--all:
--	${CC} ${CFLAGS} ${SRC} ${INCL} ${LDFLAGS}
 +include ../common.mk
  
+-all:
+-	${CC} ${CFLAGS} ${SRC} ${INCL} ${LDFLAGS}
 +CC	= $(CXX)
 +INCL	= -I. -I$(ROOT_DIR)/prefix/include
 +CFLAGS	= -std=c++14 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive -Wall -Wextra $(INCL)
@@ -21,5 +50,33 @@ index 4a9db83..22c16cc 100644
 +LDFLAGS	=  -L$(ROOT_DIR)/prefix/lib -fopenmp
 +LOADLIBES = -lgmp -lmpfr -lgsl -lgslcblas -lntl
  
++.PHONY: do
++do:
+ 
 +main.out: main.cpp
 +	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
++
++external:
++	mkdir -p $@
++
++external/generator_svp.zip.done: external
++	wget http://www.latticechallenge.org/svp-challenge/download/generator.zip -O $(basename $@)
++	unzip -d $< $(basename $@)
++	touch $@
++
++external/generator_ideal.zip.done: external
++	wget http://www.latticechallenge.org/ideallattice-challenge/download/generator.zip -O $(basename $@)
++	unzip -d $< $(basename $@)
++	touch $@
++
++challenge-600.bz2.done:
++	wget http://www.latticechallenge.org/challenges/challenge-600.bz2 -O $(basename $@)
++	bzip2 -d $(basename $@)
++	touch $@
++
++LWE_40_005.txt:
++	wget https://www.latticechallenge.org/lwe_challenge/challenges/LWE_40_005.txt -O $@
++
++.PHONY: download
++download: external/generator_svp.zip.done external/generator_ideal.zip.done \
++    challenge-600.bz2.done LWE_40_005.txt
