@@ -1,8 +1,8 @@
 diff --git a/pbkzlib/Makefile b/pbkzlib/Makefile
-index 4a9db83..cfad950 100644
+index 4a9db83..d9d54b4 100644
 --- a/pbkzlib/Makefile
 +++ b/pbkzlib/Makefile
-@@ -1,11 +1,39 @@
+@@ -1,11 +1,41 @@
 -CC	= g++
 -SRC	= main.cpp
 -BOOST_DIR = ./boost_1_66_0
@@ -13,6 +13,8 @@ index 4a9db83..cfad950 100644
  
 -all:
 -	${CC} ${CFLAGS} ${SRC} ${INCL} ${LDFLAGS}
++.DEFAULT_GOAL := main.out
+ 
 +CC	= $(CXX)
 +INCL	= -I. -I$(ROOT_DIR)/prefix/include
 +CFLAGS	= -std=c++14 -march=native -Ofast -funroll-loops -flto -fomit-frame-pointer -fprefetch-loop-arrays -msse4 -fpermissive -Wall -Wextra $(INCL)
@@ -22,7 +24,7 @@ index 4a9db83..cfad950 100644
  
 +.PHONY: do
 +do:
- 
++
 +main.out: main.cpp
 +	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
 +
