@@ -68,6 +68,7 @@ template <typename T,typename T2> inline void computeGramSchmidtline(pbkzmatrix<
 template <typename CFLOAT,typename T> int BasisUpdateGSsmall(LatticeBasis<T>& B,mat_ZZ*U,int istart,int iend,FoundENUMVectors& EV,int vl,int option,char memoryflag=0) {
 
     //Insert vectors after B[istart]
+
     EV.duplicate();
     EV.erasesingle();
     
@@ -135,7 +136,8 @@ template <typename CFLOAT,typename T> int BasisUpdateGSsmall(LatticeBasis<T>& B,
         }
     }
     int numcandidates = k-cols;
-
+    
+    
     //Greedy reordering
     int j = 0;
     CFLOAT localdet = 0;
@@ -150,19 +152,29 @@ template <typename CFLOAT,typename T> int BasisUpdateGSsmall(LatticeBasis<T>& B,
         
         for (int i=jj;i<rows;i++) {
             //check all projective length
-            double proj = ProjectedLength(LB,1,j-1,LB.L[i]);
+            double proj = ProjectedLength(LB,1,j,LB.L[i]);
             if (proj>0.5) {
                 if ((minproj == -1) || (proj < minproj)){
                     minproj = proj;
                     index = i;
                 }
             }
+            //cout << "minproj=" << minproj << " index=" << i << "/" << rows << endl;
         }
+ 
         
+        //cout << "j=" << j << " cols=" << cols << endl;
+        //cout << "cback[" << j << "]=" << cback[j] << endl;
         if (minproj>0) {
 
+            if (j>=cols) {  //for debug
+                cout << "invalid read? j=" << j << " cols=" << cols << endl;
+                cout << "minproj=" << minproj << endl;
+                exit(0);
+            }
+
             if (firstflag==true) {
-                if (cback[j] <= minproj) {
+                if (cback[j] <= minproj) {      //invalid read
                     //not inserted
                     index = j;
                 } else {
@@ -176,7 +188,7 @@ template <typename CFLOAT,typename T> int BasisUpdateGSsmall(LatticeBasis<T>& B,
             }
 
             if (firstflag==false) {
-                localdet += log(cback[j]);
+                localdet += log(cback[j]);      //invalid read
                 newdet += log(minproj);
             }
             if (j>=1) {

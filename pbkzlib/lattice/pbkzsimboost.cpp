@@ -17,6 +17,7 @@ void PBKZParam(double& alpha,double& r,bkzfloat& prob,int beta) {
 
 template <typename T> T ibeta_inv_wrapper(T a,T b,T x) {
 #ifdef _ibeta_approx_wrapper
+
     if (x<1e-20) {
         T lower = 0;
         T upper = 1.0;
@@ -45,7 +46,7 @@ template <typename T> T ibeta_inv_wrapper(T a,T b,T x) {
 #endif
 }
 
-template <typename T> bkzfloat ENUMCostLB_maketable(std::vector<T>& lbt,int istart,int iend,bkzfloat prob,char mode=modesingle) {
+template <typename T> void ENUMCostLB_maketable(std::vector<T>& lbt,int istart,int iend,bkzfloat prob,char mode=modesingle) {
     lbt.resize(iend+1);
     int dim = iend-istart+1;
     for (int i=iend;i>=istart+2;i--) {  //+2 by omitting last parts
@@ -99,7 +100,7 @@ template <typename T> bkzfloat ENUMCostLB(std::vector<T>& c,int istart,int iend,
             if (mode==modesingle) {
                 lf = ibeta_inv_wrapper<bkzfloat>(aa,bb,prob);   //lower bound of radius
                 lf = mypower(lf,0.5*(iend-i+1));
-                
+                //cout << i << "," << lf << endl;
             } 
             if (mode==modeGNR) {
                 if (numbases==-1) {
@@ -108,6 +109,7 @@ template <typename T> bkzfloat ENUMCostLB(std::vector<T>& c,int istart,int iend,
                 } else {
                     lf = ibeta_inv_wrapper<bkzfloat>(aa,bb,prob/numbases);
                     lf = mypower(lf,0.5*(iend-i+1))*numbases;
+                    cout << i << " " << lf<< " " << aa << " " << bb << endl;
                 }
             } 
         } else {

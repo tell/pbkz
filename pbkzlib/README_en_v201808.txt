@@ -1,8 +1,8 @@
 
 ####################
 Progressive BKZ Library
-Version 201803
-Released date 2018/03/12
+Version 201808
+Released date 2018/08/06
 
 Contact email address:
 pbkz-info@ml.nict.go.jp
@@ -245,6 +245,9 @@ is recoded from the open source code Sage-7.1, where the function is Ågrandom_un
 ################
    HISTORY
 ################
+
+v201808 (2018/08/06)
+ - Small bug fixes
 
 v201803 (2018/03/12)
 

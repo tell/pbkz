@@ -226,6 +226,7 @@ public:
             process[i].t_enum = newstr.process[i].t_enum;
             process[i].cost = newstr.process[i].cost;
         }
+        return *this;
     }
     
     void savetofile(std::string fname) {
@@ -317,7 +318,7 @@ void gen_bkzstrategy(BKZStrategy& BS,int dim,int sbeta,int ebeta,bkzfloat const_
 #pragma omp parallel  num_threads(parallel)
     {
         int mythread = omp_get_thread_num();
-        for (int beta=sbeta;beta<=min(dim-1,ebeta+2);beta++) {
+        for (int beta=sbeta;beta<=min(dim-5,ebeta+2);beta++) {
             if (beta%parallel==mythread) {
                 bkzconstants::simlogfec(dim,beta);   //empty call for generating table
             }

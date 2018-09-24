@@ -13,7 +13,7 @@
 
 void announcement() {
     
-    cout_title("Progressive BKZ library test (version 201803)");
+    cout_title("Progressive BKZ library test (version 201808)");
     
     cout << "Notes:" << endl;;
     cout << "1. It takes about 30-60 minutes." << endl;
@@ -1028,6 +1028,7 @@ bool enum_test3() {
     cout_subtitle("Checking mild probability");
 
     LatticeBasis<double> dB;
+
     for (int dim = 48;dim<=60;dim+=4) {
         int seed = 0;
         dB = svpc::getlllbasis(dim,seed);
@@ -1054,10 +1055,10 @@ bool enum_test3() {
         int seed = 0;
         lB = svpc::getlllbasis(dim,seed);
         lB.updateGSBasis();
-        double radius = 3.0 * LatticeGH(lB);
-        bkzfloat prob = pow(3.0,-dim);
+        double radius = 3.5 * LatticeGH(lB);
+        bkzfloat prob = pow(3.5,-dim);
         cout_separate
-        cout << "find a vector shorter than 3GH: dim=" << dim <<  endl;
+        cout << "find a vector shorter than 3.5GH: dim=" << dim <<  endl;
         cout << "GH=" << LatticeGH(lB) << " radius=" << radius << " p_succ=" << prob << endl;
         mat_ZZ VV;
         VV = ENUM(lB,radius,prob,enum_mode_find_abort,0,VL2,"parallel=" + to_stdstring(parallel) + " finishmode=exact");
@@ -1403,6 +1404,10 @@ bool simulate_svp_challenge() {
     bkzfloat coeff_lll = 1.61028e-07;
     bkzfloat coeff_enum = 5.07206e-11;  //constants in BKZ simulator, not exactly ENUM speed
 
+        //alpha_enum=1.43128e-10       
+        //alpha_LLL=4.34891e-07
+    
+    
     double Loopratio = 1.42616;
 
     bkzfloat enum_speed = 35000000; //benchmark at long double
@@ -1817,6 +1822,7 @@ bool simulator_param_estim() {
 void bkztest() {
     
     double ss = gettimeofday_sec(); //timer
+
 
     announcement();
     if (basic_test()==false) exit(0);

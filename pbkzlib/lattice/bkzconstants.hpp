@@ -31,7 +31,7 @@ template <typename T> class autoarray1d {
         return data[i];
     }
     int size() {return data.size();};
-    int resize(int i) {data.resize(i);};
+    void resize(int i) {data.resize(i);};
 
     void load(std::string& fname) {
         loadstdvector(data,fname);
@@ -59,7 +59,7 @@ template <typename T> class autoarray2d {
         return data[i];
     }
     int size() {return data.size();};
-    int resize(int i) {data.resize(i);};
+    void resize(int i) {data.resize(i);};
 
     void load(std::string& fname) {
         if (FileExists(fname)==false) {
@@ -126,7 +126,7 @@ template <typename T> class autoarray3d {
         return data[i];
     }
     int size() {return data.size();};
-    int resize(int i) {data.resize(i);};
+    void resize(int i) {data.resize(i);};
 
     void load(std::string& fname,int checkdisp=0) {
         if (FileExists(fname)==false) {
@@ -209,7 +209,7 @@ template <typename T> class autoarray4d {
         return data[i];
     }
     int size() {return data.size();};
-    int resize(int i) {data.resize(i);};
+    void resize(int i) {data.resize(i);};
 
     void load(std::string& fname) {
         if (FileExists(fname)==false) {

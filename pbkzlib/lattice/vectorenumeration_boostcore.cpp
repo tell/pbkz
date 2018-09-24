@@ -2,8 +2,10 @@
 #include "enumwrapper.cpp"
 //Note: this template generates {single,multi}-threaded subroutines for {ENUM,ENUM-CVP} problems.
 
-//#define depthcost
 
+//#define depthcost
+//Note: if you want to get some statistics, enable this option
+//it counts number of nodes precisely, but slows down the enumeration
 
 //#ifdef SSE_ROUND
 #ifdef __SSE4_1__
@@ -131,12 +133,11 @@
          int lmctlimit = 1000000;
          if (typeid(PFLOAT)==typeid(double)) lmctlimit = 50000000;
          if (typeid(PFLOAT)==typeid(long double)) lmctlimit = 20000000;
-
          
 #ifdef depthcost
          long int totaldepthcost=0;
          std::vector<long int> depthcostarray;
-         depthcostarray.resize(bs);
+         depthcostarray.resize(jj+bs+1);
 #endif
 
          PFLOAT* pruning_func = (PFLOAT*)shared_memory::allocate1<PFLOAT>(7+100*recursive,bs+1);
@@ -292,7 +293,9 @@
 #endif
 
         long double gmct = 0;   //global enum count (/10^6)
-
+#ifdef depthcost
+        long double gmct_inside = 0;   //global enum count (/10^6)
+#endif
         long double gh = lattice_tools::LatticeGH(cd,jj,jj+bs-1,INPUT_SQUARED);
         
          /* Display messages*/
@@ -312,7 +315,9 @@
                 for (int i=jj;i<min(jj+bs,(int)normalpf.size());i++) cout << i << " " << normalpf[i] << endl;
              }
              for (int i=jj;i<min(jj+bs,(int)cd.size());i++) cc[i] = sqrt(cd[i]);
-             cout << "Rigid_upper_bound=" << pruning_func::Rigid_upper_cost<bkzfloat,bkzfloat>(normalpf,cc,sqrt(clim),jj,bs) << endl;
+             bkzfloat upper = pruning_func::Rigid_upper_cost<bkzfloat,bkzfloat>(normalpf,cc,sqrt(clim),jj,bs);
+             EV.expectednodes = upper/2;
+             cout << "Rigid_upper_bound=" << upper << endl;
              cout << "LatticeGH=" << gh << endl;
          }
        /* end of displays */
@@ -333,7 +338,10 @@
         //variables used in multithread
         int mythread = omp_get_thread_num();
         long long int lmct = 0;  
-
+#ifdef depthcost
+        long long int lmct_inside = 0;  
+#endif
+        
         int s,t;
         s = t = jj;
         char cflag;
@@ -355,6 +363,9 @@
                 cflag = 0;
 
                 if (ctilda[t] < pftemp[t]) {
+#ifdef depthcost
+                    lmct_inside++;  
+#endif
                     if (t<=jj+slide) {
                         //a vector s.t. pi_{i}|v|<|b*_i| (i=jj+slide+4) is found
                         if ( (enummode & (enum_mode_find_shortest + enum_mode_find_abort + enum_mode_find_short_projection)) != 0) {
@@ -595,10 +606,23 @@
                  t += endflag;
 #endif
                 }
-           }  //end of enum
+#ifdef depthcost
+                if ((lmct_inside)^lmctlimit) {
+                } else {
+                     gmct_inside += lmct_inside / 1000000.0;
+                     lmct_inside %= 1000000;
+                }
+#endif
+
+            
+            }  //end of enum
             gmct += 0.000001 * lmct;
             lmct = 0;
-
+#ifdef depthcost
+            gmct_inside += 0.000001 * lmct_inside;
+            lmct_inside = 0;
+#endif
+            
 #ifdef define_multi
         }       // end of if(mythread==0)
         //below the subroutine for multithread
@@ -1105,7 +1129,6 @@
 #ifdef define_cvp
         addbias(EV,cvpbias);
 #endif
-
         //Count # found vector
         es = gettimeofday_sec() - es;
         if (vl>=3) {
@@ -1123,12 +1146,12 @@
 #ifdef depthcost
         long int totalnodes=0;
         for (int i=0;i<depthcostarray.size();i++) {
-            cout << "depth[" << i << "]=" << depthcostarray[i] << endl;
+            //cout << "depth[" << i << "]=" << depthcostarray[i] << endl;
             totalnodes += depthcostarray[i];
         }
-        cout << "totalnodes=" << totalnodes << endl;
-        cout << "final_totaldepthcost=" << totaldepthcost << endl; 
-        exit(0);
+        //cout << "totalnodes=" << totalnodes << endl;
+        //cout << "final_totaldepthcost=" << totaldepthcost << endl; 
+        EV.insidenodes = gmct_inside * 1000000.0;
 #endif
     }
 

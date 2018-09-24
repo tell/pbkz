@@ -41,8 +41,10 @@ namespace lattice_tools {
             for (j=0;j<=i;j++) det += log(CNconstant[j]);
             det = exp(1.0 * det/(i+1)) * (double)bkzconstants::ghconstant(i+1); 
             smallghconst[i+1] = CNconstant[i] / det;
+            //cout << smallghconst[i+1] << ",";
         }
-
+        //exit(0);
+        
         for (i=0;i<25;i++) swap(CNconstant[i],CNconstant[49-i]);
         det=0;
         for (j=0;j<50;j++) det += log(CNconstant[j]);

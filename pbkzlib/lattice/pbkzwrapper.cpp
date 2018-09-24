@@ -235,7 +235,6 @@ template <typename PFLOAT> int EnumthenUpdate(LatticeBasis<PFLOAT>& B,mat_ZZ*U,i
         }
         debug_display(cout << "update_time=" << gettimeofday_sec() -ss << endl;)
         return ret;
-
 }
 #include "bkzpreprocessboost.cpp"
 #include "pbkzsimtimeboost.cpp"
@@ -285,8 +284,10 @@ template <typename PFLOAT> void PrunedBKZ(LatticeBasis<PFLOAT>& B,mat_ZZ*U,int b
                 int swap;
                 local_LLL(B,0,0.999,bstart,bend,stnormal,VL0,swap);
             }
-            if (vl>=1) cout << "time=" <<   gettimeofday_sec() - ss << " tour=" << t+1;
-            if (tour>0) cout << "/" << tour;
+            if (vl>=1) {
+                cout << "time=" <<   gettimeofday_sec() - ss << " tour=" << t+1;
+                if (tour>0) cout << "/" << tour;
+            }
             cout << " |b1|=" << LengthOf(B.L[0]) << endl;
             t++;
             if ((tour>0) && (t>=tour)) break;

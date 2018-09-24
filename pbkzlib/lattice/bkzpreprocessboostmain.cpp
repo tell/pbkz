@@ -131,7 +131,7 @@ template <typename PFLOAT,typename CFLOAT> void ExtractSubBlock(SmallLatticeBasi
     for (int i=istart+1;i<=iend;i++) {
         mings = min(mings,B.gs.c[i]);
     }    
-    mings = mings/10000;
+    mings = mings/100000000;
     int dim = iend - istart + 1;
     
     //diagonal

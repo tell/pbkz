@@ -39,7 +39,7 @@ namespace lattice_enum {
     double current_etime;
     double current_cputime;
 
-    template <typename T,typename T2> T storetomemory(FoundENUMVectors& EV,T2* utildavec, T ctilda, int jj, int kk,int enummode) {
+    template <typename T,typename T2> void storetomemory(FoundENUMVectors& EV,T2* utildavec, T ctilda, int jj, int kk,int enummode) {
         //Store the data of found vector to cache memory
         if (enummode==enum_mode_find_short_projection) {
             //If the vector is zero or b1, no vector is stored
@@ -49,7 +49,7 @@ namespace lattice_enum {
                     zeroflag = 1;
                 }
             }
-            if (zeroflag==0) return 0;
+            if (zeroflag==0) return;
         }
 
         FoundVectorInfo FVtemp;

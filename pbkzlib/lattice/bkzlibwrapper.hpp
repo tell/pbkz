@@ -30,6 +30,7 @@ template <typename T> struct GSapprox {
         vec_copy(cd,newc.cd);
         vec_copy(len,newc.len);
         vec_copy(mu,newc.mu);
+        return *this;
     }
 
     T minbi() {
@@ -95,6 +96,15 @@ template <typename T> struct GSapprox {
     }
 };
 
+template<typename T> bool operator <(GSapprox<T>& gs1,GSapprox<T>& gs2) {
+    int n = min(gs1.c.size(),gs2.c.size());
+    for (int i=1;i<n;i++) {
+        if (gs1.c[i] < gs2.c[i]) return true;
+        if (gs1.c[i] > gs2.c[i]) return false;
+    }
+    return false;
+}
+
 template <typename T> void computeGramSchmidtline(mat_ZZ& L,GSapprox<T>& gs,std::vector<std::vector<T> >& approxelement,int index,int ioffset=1,int joffset=1) {
 
     //assume GS basis for L[1..index-1] is computed
@@ -159,6 +169,7 @@ template <typename GFLOAT,typename MAT,typename VEC> struct LatticeBasisBase {
     LatticeBasisBase() {
         isNecessaryGSUpdate=true;        
         GScomputed = 0;
+        dim=0;
     }
 
     LatticeBasisBase& operator =(const MAT& newL) {
@@ -280,6 +291,34 @@ template <typename GFLOAT,typename MAT,typename VEC> struct LatticeBasisBase {
         ret += gs.cd[j];
         return sqrt(ret);
     }
+    
+    GFLOAT loghalfvolume() {
+        GFLOAT ret = 0;
+        int n = L.NumRows();
+        for (int i=1;i<=n/2;i++) {
+            ret += log(gs.c[i]);
+        }
+        return ret;
+    }
+    
+    GFLOAT energy() {
+        GFLOAT ret = 0;
+        int n = L.NumRows();
+        for (int i=1;i<=n;i++) {
+            ret += gs.cd[i];
+        }
+        return ret;
+    }
+    
+    GFLOAT loglllpotential() {
+        GFLOAT ret = 0;
+        int n = L.NumRows();
+        for (int i=1;i<=n;i++) {
+            ret += log(gs.c[i]) * (n-i+1);
+        }
+        return ret;
+    } 
+    
 };
 
 #include "pbkzmatrix.cpp"

@@ -91,12 +91,11 @@ template <typename T> T Detect_delta(std::vector<T>& cd,int istart,int iend,int 
     return  ret;
 }
 
-template <typename T,typename T2,typename T3> T FullENUMCost(std::vector<T2>& c,int istart,int iend,T3 radius,int opt=INPUT_NONSQUARED) {
-
+template <typename T,typename T2,typename T3> T FullENUMCostbase(std::vector<T2>& c,std::vector<T>& partcost,int istart,int iend,T3 radius,int opt=INPUT_NONSQUARED) {
     //c[1..n] is |b*i|
     T ret = 0;
     T t = 1;
-    
+    partcost.resize(iend+1);
     for (int i=iend;i>=istart;i--) {
         if (opt==INPUT_SQUARED) {
             t *= (radius / sqrt(c[i]));
@@ -104,9 +103,15 @@ template <typename T,typename T2,typename T3> T FullENUMCost(std::vector<T2>& c,
         if (opt==INPUT_NONSQUARED) {
             t *= (radius / c[i]);
         } 
-        ret += t * bkzconstants::vol_unit_ball(iend-i+1);
+        partcost[i] = t * (T)bkzconstants::vol_unit_ball(iend-i+1);
+        ret += partcost[i];
     }    
     return ret*0.5;
+}
+
+template <typename T,typename T2,typename T3> T FullENUMCost(std::vector<T2>& c,int istart,int iend,T3 radius,int opt=INPUT_NONSQUARED) {
+    std::vector<T> partcost;   //dummy
+    return FullENUMCostbase(c,partcost,istart,iend,radius,opt);
 }
 
 template <typename T,typename T2,typename T3> T FullENUMCost(LatticeBasis<T2>& B,T3 radius) {
@@ -118,7 +123,6 @@ template <typename T,typename T2> T FullENUMCost(std::vector<T2>& c,int istart,i
     T radius = lattice_tools::LatticeGH(c,istart,iend,opt);
     //cout << "radius=" << radius << endl;
     return FullENUMCost<T>(c,istart,iend,radius,opt);
-
 }
 
 #define _enable_pfcache
@@ -533,7 +537,7 @@ namespace pruning_func {
         bkzfloat range;
         bkzfloat logprob = log(prob);
         bkzfloat alpha;
-        
+        bkzfloat pp = prob;
         while (1) {
             if (tt.data.size()==0) {
                 alpha = 1.0;
@@ -550,9 +554,10 @@ namespace pruning_func {
                 PF.rd[k] = min(1.0,rr.convert_to<double>());
             }
             PF.rd[iend] = 1.0;
-            bkzfloat pp = pruning_func::Rigid_lower_prob(PF.rd,istart,dim);
+            pp = pruning_func::Rigid_lower_prob(PF.rd,istart,dim);
             tt.add(alpha,log(pp));
         }
+        return pp.convert_to<double>();
     }
 
     double SetPowerPruningFunction(PruningFunction& PF,int istart,int iend,bkzfloat& prob,int iceil,int parallel,int vl=0,char opt=PPFfast) {

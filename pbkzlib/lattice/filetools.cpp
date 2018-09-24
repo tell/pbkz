@@ -38,6 +38,8 @@ int lock(std::string fname) {
 void unlock(int fd) {
     struct flock fl;
     fl.l_type = F_UNLCK;
+    fl.l_start = 0;
+    fl.l_len = 0;
     fl.l_pid = getpid();
     fcntl(fd,F_SETLK,&fl);
     close(fd);
@@ -79,6 +81,7 @@ template <typename T> void loaddoublevector(vector<vector<T> >& D,std::string fn
     int i,j,k;
     int listsize;
     int fd = lock(fname);
+
     ifstream vstream;
     vstream.open(fname.c_str(),ios_base::in);
     if (vstream.fail()==true) return; 

@@ -14,7 +14,7 @@ template <typename T> std::string to_hexstring(T x) {
 }
 
 
-void ExtractOptions(std::map<std::string,std::string>& options,std::string& opts) {
+void ExtractOptions(std::map<std::string,std::string>& options,std::string opts) {
     
     std::vector<std::string> args;
     std::vector<std::string> args2;

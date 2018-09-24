@@ -3,7 +3,7 @@
 //Size reduction
 
 #ifdef define_normal
-template <typename T> inline  T SizeReduce(LatticeBasis<T>& B,mat_ZZ*U,int j,int opt=gsupdate) {
+template <typename T> inline  void SizeReduce(LatticeBasis<T>& B,mat_ZZ*U,int j,int opt=gsupdate) {
 #endif
 
 #ifdef define_small

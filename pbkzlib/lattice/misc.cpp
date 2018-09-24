@@ -61,26 +61,26 @@ void RowTransformwrap(vec_ZZ& A, vec_ZZ& B, const ZZ& MU1) {
     
 }
 
-bool conv(mpfr_float& a,ZZ& b) {    a = (mpfr_float)to_stdstring(b); }
+void conv(mpfr_float& a,ZZ& b) {    a = (mpfr_float)to_stdstring(b); }
 
-bool conv(float50& a,ZZ& b) {    a = (float50)to_stdstring(b); }
-bool conv(float40& a,ZZ& b) {    a = (float40)to_stdstring(b); }
-bool conv(float30& a,ZZ& b) {    a = (float30)to_stdstring(b); }
-bool conv(float20& a,ZZ& b) {    a = (float20)to_stdstring(b); }
-bool conv(float15& a,ZZ& b) {    a = (float15)to_stdstring(b); }
-bool conv(float10& a,ZZ& b) {    a = (float10)to_stdstring(b); }
+void conv(float50& a,ZZ& b) {    a = (float50)to_stdstring(b); }
+void conv(float40& a,ZZ& b) {    a = (float40)to_stdstring(b); }
+void conv(float30& a,ZZ& b) {    a = (float30)to_stdstring(b); }
+void conv(float20& a,ZZ& b) {    a = (float20)to_stdstring(b); }
+void conv(float15& a,ZZ& b) {    a = (float15)to_stdstring(b); }
+void conv(float10& a,ZZ& b) {    a = (float10)to_stdstring(b); }
 
 
-bool conv(ZZ& a,bkzfloat& b) {
+void conv(ZZ& a,bkzfloat& b) {
     conv(a,to_stdstring(b).c_str());
 }
 
-bool conv(quad_float& a,ZZ& b) {
+void conv(quad_float& a,ZZ& b) {
     a = to_quad_float(b);
 }
 
-bool conv(double& a,ZZ& b) { a = to_double(b); }
-bool conv(long double& a,ZZ& b) { a = boost::lexical_cast<long double>(b); }
+void conv(double& a,ZZ& b) { a = to_double(b); }
+void conv(long double& a,ZZ& b) { a = boost::lexical_cast<long double>(b); }
 
 
 

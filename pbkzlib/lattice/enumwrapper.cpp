@@ -48,6 +48,8 @@ struct FoundENUMVectors {
     std::vector<FoundVectorInfo> data;
     int foundnum;
     long long int totalnodes;
+    long long int insidenodes;  //only used when #define depthcost is on
+    bkzfloat expectednodes;
     double etime;
     
     void clearmemory() {
@@ -389,6 +391,5 @@ template <typename T> mat_ZZ ENUMCV(LatticeBasis<T>& B,vec_ZZ& targetv,bkzfloat 
     bkzfloat prob = pruning_func::SetPruningFunction(B,PF, radius , tprob,pfoption);
     return ENUMbackend<T>(B,targetv,PF,radius,enumoption,vl,otheroptions,modecvp);
 }
-
 
 #endif

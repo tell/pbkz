@@ -35,7 +35,7 @@
 #define VL6 6
 #define VL7 7
 
-typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<30> > bkzfloat;
+typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<20> > bkzfloat;
 
 typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<10> > float10;
 typedef boost::multiprecision::number<boost::multiprecision::cpp_dec_float<15> > float15;
