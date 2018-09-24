@@ -82,6 +82,7 @@ using namespace std;
 NTL_CLIENT
 
 //OpenMP
+#ifdef _OPENMP
 #include <omp.h>
-
+#endif
         
